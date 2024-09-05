@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class eliminar_columnas {
-    public static void eliminarColumnas(String archivoExcel, String newArchivoExcel) throws IOException {
+    public static void eliminarColumnas(String archivoExcel) throws IOException {
         // Cargar el archivo Excel
         FileInputStream archivo = new FileInputStream(archivoExcel);
         Workbook wb = new XSSFWorkbook(archivo);
@@ -40,7 +40,7 @@ public class eliminar_columnas {
         }
 
         // Guardar los cambios en el archivo
-        FileOutputStream archivoSalida = new FileOutputStream(newArchivoExcel);
+        FileOutputStream archivoSalida = new FileOutputStream(archivoExcel);
         wb.write(archivoSalida);
 
         // Cerrar los archivos y liberar recursos
@@ -81,10 +81,9 @@ public class eliminar_columnas {
 
     public static void main(String[] args) {
         String rutaArchivo = "O:/programa/cruce-datos-excel-java/test-lunes-jueves.xlsx";
-        String newArchivoExcel = "O:/programa/cruce-datos-excel-java/result.xlsx";
 
         try {
-            eliminarColumnas(rutaArchivo, newArchivoExcel);
+            eliminarColumnas(rutaArchivo);
             System.out.println("Columnas eliminadas correctamente.");
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());
