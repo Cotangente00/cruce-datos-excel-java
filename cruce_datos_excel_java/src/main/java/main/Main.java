@@ -10,6 +10,7 @@ public class Main {
         eliminar_filas.main(args);
         try {
             eliminar_columnas.eliminarColumnas(rutaArchivo);
+            borrar_columnas_restantes.borrarColumnasRestantes(rutaArchivo);
             System.out.println("Columnas eliminadas correctamente.");
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());
