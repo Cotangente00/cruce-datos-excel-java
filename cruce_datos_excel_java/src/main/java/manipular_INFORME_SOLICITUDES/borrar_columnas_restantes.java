@@ -14,7 +14,7 @@ public class borrar_columnas_restantes {
         Sheet ws = wb.getSheetAt(0); // Obtener la primera hoja
 
         // Índices de las columnas a eliminar (empiezan desde 0: A=0, B=1, C=2, etc.)
-        int[] columnasAEliminar = {13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
+        int[] columnasAEliminar = {14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
 
         // Recorrer todas las filas de la hoja
         for (Row fila : ws) {
