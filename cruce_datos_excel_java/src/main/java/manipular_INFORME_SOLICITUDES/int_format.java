@@ -12,7 +12,7 @@ public class int_format {
         // Cargar el archivo Excel
         FileInputStream fileInputStream = new FileInputStream(inputFilePath);
         Workbook workbook = new XSSFWorkbook(fileInputStream);
-        Sheet sheet = workbook.getSheet("INFORME SOLICITUDES");
+        Sheet sheet = workbook.getSheetAt(0);
 
         // Convertir columnas A (índice 0), B (índice 1) y J (índice 9)
         int[] columnas = {0, 1, 9};
