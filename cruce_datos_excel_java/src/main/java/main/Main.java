@@ -13,6 +13,7 @@ public class Main {
             borrar_columnas_restantes.borrarColumnasRestantes(rutaArchivo);
             filtrar_ciudades.filtrarCiudades(rutaArchivo);
             date_format.formatearFechas(rutaArchivo);
+            int_format.convertirTextoANumero(rutaArchivo);
             System.out.println("Columnas eliminadas correctamente.");
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());

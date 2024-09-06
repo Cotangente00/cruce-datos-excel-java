@@ -23,7 +23,7 @@ public class filtrar_ciudades {
         int columnaCiudadIndex = 12;
 
         // Iterar sobre las filas y eliminar las que no cumplan con el criterio
-        for (int rowIndex = sheet.getLastRowNum(); rowIndex >= 1; rowIndex--) {  // Empieza desde el final para evitar problemas con el shift de filas
+        for (int rowIndex = sheet.getLastRowNum(); rowIndex >= 1; rowIndex--) {  // Empieza desde el final para evitar problemas con el shift de filas y salteandose el encabezado
             Row row = sheet.getRow(rowIndex);
             if (row != null) {
                 Cell cellCiudad = row.getCell(columnaCiudadIndex);
