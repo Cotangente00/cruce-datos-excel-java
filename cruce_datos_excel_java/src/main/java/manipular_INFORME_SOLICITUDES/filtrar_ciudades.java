@@ -21,6 +21,7 @@ public class filtrar_ciudades {
 
         // Encontrar el índice de la columna "Ciudad" (M es la columna 12, 0-indexed)
         int columnaCiudadIndex = 12;
+        int columnaOIndex = 14;
 
         // Iterar sobre las filas y eliminar las que no cumplan con el criterio
         for (int rowIndex = sheet.getLastRowNum(); rowIndex >= 1; rowIndex--) {  // Empieza desde el final para evitar problemas con el shift de filas y salteandose el encabezado
@@ -28,16 +29,26 @@ public class filtrar_ciudades {
             if (row != null) {
                 Cell cellCiudad = row.getCell(columnaCiudadIndex);
                 String valorCiudad = (cellCiudad != null) ? cellCiudad.getStringCellValue().trim() : "";
-
-                // Eliminar fila si la ciudad no está en la lista de ciudades válidas
-                if (!ciudadesValidas.contains(valorCiudad.toLowerCase())) {
+                if (valorCiudad.equalsIgnoreCase("soacha")){
+                    Cell cellColumnaO = row.getCell(columnaOIndex);
+                    if (cellColumnaO == null) {
+                        cellColumnaO = row.createCell(columnaOIndex);
+                    }  
+                    cellColumnaO.setCellValue("Soacha(Validar Servicio)");
+                } else if (valorCiudad.isEmpty()){
+                    Cell cellColumnaO = row.getCell(columnaOIndex);
+                    if (cellColumnaO == null) {
+                        cellColumnaO = row.createCell(columnaOIndex);
+                    }  
+                    cellColumnaO.setCellValue("Ciudad vacía(Confirmar)");
+                } else if (!ciudadesValidas.contains(valorCiudad.toLowerCase())) {
                     int lastRow = sheet.getLastRowNum();
                     if (rowIndex < lastRow) {
                         sheet.shiftRows(rowIndex + 1, lastRow, -1);
                     } else {
                         sheet.removeRow(row);
                     }
-                }
+                } 
             }
         }
 
