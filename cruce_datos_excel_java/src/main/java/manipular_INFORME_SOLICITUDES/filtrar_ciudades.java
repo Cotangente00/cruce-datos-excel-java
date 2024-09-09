@@ -52,6 +52,13 @@ public class filtrar_ciudades {
             }
         }
 
+        int EliminarColumnaN = 12; // Índice de la columna (empezando desde 0)
+        for (Row fila : sheet) {
+            if (fila != null && fila.getCell(EliminarColumnaN) != null) {
+                fila.removeCell(fila.getCell(EliminarColumnaN));
+            }
+        }
+
         // Escribir los cambios en un nuevo archivo
         FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
         workbook.write(fileOutputStream);
