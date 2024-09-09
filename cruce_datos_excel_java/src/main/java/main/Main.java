@@ -14,6 +14,7 @@ public class Main {
             filtrar_ciudades.filtrarCiudades(rutaArchivo);
             date_format.formatearFechas(rutaArchivo);
             int_format.convertirTextoANumero(rutaArchivo);
+            novedades_expertas.resaltarNovedad(rutaArchivo);
             System.out.println("Columnas eliminadas correctamente.");
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());
