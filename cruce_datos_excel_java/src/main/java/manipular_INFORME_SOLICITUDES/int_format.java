@@ -11,14 +11,14 @@ public class int_format {
     public static void convertirTextoANumero(String inputFilePath) throws IOException {
         // Cargar el archivo Excel
         FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-        Workbook workbook = new XSSFWorkbook(fileInputStream);
-        Sheet sheet = workbook.getSheetAt(0);
+        Workbook wb = new XSSFWorkbook(fileInputStream);
+        Sheet ws = wb.getSheetAt(0);
 
         // Convertir columnas A (índice 0), B (índice 1) y J (índice 9)
         int[] columnas = {0, 1, 9};
 
-        for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) { // Inicia en 1 para saltar el encabezado
-            Row row = sheet.getRow(rowIndex);
+        for (int rowIndex = 1; rowIndex <= ws.getLastRowNum(); rowIndex++) { // Inicia en 1 para saltar el encabezado
+            Row row = ws.getRow(rowIndex);
             if (row != null) {
                 for (int colIndex : columnas) {
                     Cell cell = row.getCell(colIndex);
@@ -40,11 +40,11 @@ public class int_format {
 
         // Guardar los cambios en un nuevo archivo
         FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-        workbook.write(fileOutputStream);
+        wb.write(fileOutputStream);
 
         // Cerrar recursos
         fileOutputStream.close();
-        workbook.close();
+        wb.close();
         fileInputStream.close();
 
         System.out.println("Proceso completado. Datos convertidos a formato numérico y archivo guardado en: " + inputFilePath);

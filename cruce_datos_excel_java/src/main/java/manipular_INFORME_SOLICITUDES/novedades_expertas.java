@@ -12,17 +12,17 @@ public class novedades_expertas {
     public static void resaltarNovedad(String inputFilePath) throws IOException {
         // Cargar el archivo Excel
         FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-        Workbook workbook = new XSSFWorkbook(fileInputStream);
-        Sheet sheet = workbook.getSheetAt(0);
+        Workbook wb = new XSSFWorkbook(fileInputStream);
+        Sheet ws = wb.getSheetAt(0);
 
         // Crear un estilo de celda con relleno amarillo
-        CellStyle yellowStyle = workbook.createCellStyle();
+        CellStyle yellowStyle = wb.createCellStyle();
         yellowStyle.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
         yellowStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
         // Iterar sobre las filas (empezando desde la fila 1 para saltar el encabezado)
-        for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
-            Row row = sheet.getRow(rowIndex);
+        for (int rowIndex = 1; rowIndex <= ws.getLastRowNum(); rowIndex++) {
+            Row row = ws.getRow(rowIndex);
             if (row != null) {
                 // Obtener la celda de la columna N (índice 13)
                 Cell cellN = row.getCell(13); // Columna N = índice 13
@@ -47,7 +47,7 @@ public class novedades_expertas {
             }
         }
         int EliminarColumnaN = 13; // Índice de la columna (empezando desde 0)
-        for (Row fila : sheet) {
+        for (Row fila : ws) {
             if (fila != null && fila.getCell(EliminarColumnaN) != null) {
                 fila.removeCell(fila.getCell(EliminarColumnaN));
             }
@@ -56,11 +56,11 @@ public class novedades_expertas {
 
         // Guardar los cambios en un nuevo archivo
         FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-        workbook.write(fileOutputStream);
+        wb.write(fileOutputStream);
 
         // Cerrar recursos
         fileOutputStream.close();
-        workbook.close();
+        wb.close();
         fileInputStream.close();
 
         System.out.println("Proceso completado. Las celdas de las columnas J y K han sido resaltadas donde corresponda.");

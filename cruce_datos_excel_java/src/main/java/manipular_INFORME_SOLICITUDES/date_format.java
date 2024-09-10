@@ -13,17 +13,17 @@ public class date_format {
     public static void formatearFechas(String inputFilePath) throws IOException {
         // Cargar el archivo Excel
         FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-        Workbook workbook = new XSSFWorkbook(fileInputStream);
-        Sheet sheet = workbook.getSheetAt(0);
+        Workbook wb = new XSSFWorkbook(fileInputStream);
+        Sheet ws = wb.getSheetAt(0);
 
         // Crear un estilo de celda para formato de fecha DD/MM/YYYY
-        CellStyle dateCellStyle = workbook.createCellStyle();
-        CreationHelper createHelper = workbook.getCreationHelper();
+        CellStyle dateCellStyle = wb.createCellStyle();
+        CreationHelper createHelper = wb.getCreationHelper();
         dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("DD/MM/YYYY"));
 
         // Iterar sobre las filas para convertir y formatear las fechas en la columna D (índice 3)
-        for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) { // Inicia en 1 para saltar el encabezado
-            Row row = sheet.getRow(rowIndex);
+        for (int rowIndex = 1; rowIndex <= ws.getLastRowNum(); rowIndex++) { // Inicia en 1 para saltar el encabezado
+            Row row = ws.getRow(rowIndex);
             if (row != null) {
                 Cell cellFecha = row.getCell(3); // Columna D es el índice 3 (0-indexed)
 
@@ -46,11 +46,11 @@ public class date_format {
 
         // Guardar los cambios en un nuevo archivo
         FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-        workbook.write(fileOutputStream);
+        wb.write(fileOutputStream);
 
         // Cerrar recursos
         fileOutputStream.close();
-        workbook.close();
+        wb.close();
         fileInputStream.close();
 
         System.out.println("Proceso completado. Fechas formateadas y archivo guardado en: " + inputFilePath);    
