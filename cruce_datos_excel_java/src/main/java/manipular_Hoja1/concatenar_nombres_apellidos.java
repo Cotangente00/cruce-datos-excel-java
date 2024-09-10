@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class concatenar_nombres_apellidos {
-    public static void concatenacion(String inputFilePath, String outputFilePath) throws IOException {
+    public static void concatenacion(String inputFilePath) throws IOException {
         // Cargar el archivo Excel
         FileInputStream fileInputStream = new FileInputStream(inputFilePath);
         Workbook wb = new XSSFWorkbook(fileInputStream);
@@ -58,10 +58,7 @@ public class concatenar_nombres_apellidos {
                 }
             }
         }
-
-
-        // Guardar los cambios en un nuevo archivo
-        FileOutputStream fileOutputStream = new FileOutputStream(outputFilePath);
+        FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
         wb.write(fileOutputStream);
 
         // Cerrar recursos
@@ -104,9 +101,8 @@ public class concatenar_nombres_apellidos {
 
     public static void main(String[] args) {
         String rutaArchivo = "O:/programa/cruce-datos-excel-java/result.xlsx";
-        String rutaArchivoSalida = "O:/programa/cruce-datos-excel-java/result2.xlsx";
         try {
-            concatenacion(rutaArchivo, rutaArchivoSalida);
+            concatenacion(rutaArchivo);
         } catch (IOException e) {
             e.printStackTrace();
         }
