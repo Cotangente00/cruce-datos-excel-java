@@ -56,6 +56,30 @@ public class buscarV_nombres_cedulas {
                 }
             }
         }
+
+        int[] columnas = {12};
+
+        for (int rowIndex = 1; rowIndex <= ws.getLastRowNum(); rowIndex++) { // Inicia en 1 para saltar el encabezado
+            Row row = ws.getRow(rowIndex);
+            if (row != null) {
+                for (int colIndex : columnas) {
+                    Cell cell = row.getCell(colIndex);
+                    if (cell != null && cell.getCellType() == CellType.STRING) {
+                        String cellValue = cell.getStringCellValue();
+
+                        // Verificar si el valor de la celda es numérico o contiene espacios al inicio o final
+                        if (cellValue.matches("\\s*\\d+\\s*")) {
+                            // Eliminar espacios en blanco y convertir a numérico
+                            double numericValue = Double.parseDouble(cellValue.trim());
+                            cell.setCellValue(numericValue);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Guardar los cambios en un nuevo archivo
+
         FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
         wb.write(fileOutputStream);
 
