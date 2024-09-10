@@ -43,7 +43,6 @@ public class buscarV_nombres_cedulas {
         // Iterar sobre los números de la Hoja1 y buscar coincidencias
         rowIterator1 = ws.iterator();
         rowIterator1.next(); // Saltar el encabezado
-        int filaHoja1 = 1;
         while (rowIterator1.hasNext()) {
             Row row = rowIterator1.next();
             Cell cell = row.getCell(9);
@@ -56,7 +55,6 @@ public class buscarV_nombres_cedulas {
                     break;
                 }
             }
-            filaHoja1++;
         }
         FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
         wb.write(fileOutputStream);
@@ -66,6 +64,8 @@ public class buscarV_nombres_cedulas {
         wb.close();
         fileInputStream.close();
         }
+
+        System.out.println("Números de documento y nombres completos agregados exitosamente.");
     }
 
     public static void main(String[] args) {
