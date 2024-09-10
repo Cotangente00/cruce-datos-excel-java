@@ -1,5 +1,6 @@
 package main;
 import manipular_INFORME_SOLICITUDES.*;
+import manipular_Hoja1.*;
 import java.io.IOException;
 
 
@@ -15,6 +16,7 @@ public class Main {
             date_format.formatearFechas(rutaArchivo);
             int_format.convertirTextoANumero(rutaArchivo);
             novedades_expertas.resaltarNovedad(rutaArchivo);
+            find_table.encontrar_tabla(rutaArchivo);
             System.out.println("Columnas eliminadas correctamente.");
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());
