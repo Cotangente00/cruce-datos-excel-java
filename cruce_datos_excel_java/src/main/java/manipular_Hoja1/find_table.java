@@ -68,9 +68,12 @@ public class find_table {
             FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
             workbook.write(fileOutputStream);
             fileOutputStream.close();
-        }
-        System.out.println("Tabla transferida correctamente.");
 
+            System.out.println("Tabla transferida correctamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 

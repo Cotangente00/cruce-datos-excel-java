@@ -87,9 +87,12 @@ public class buscarV_nombres_cedulas {
             fileOutputStream.close();
             wb.close();
             fileInputStream.close();
-        }
 
-        System.out.println("Números de documento y nombres completos agregados exitosamente.");
+            System.out.println("Números de documento y nombres completos agregados exitosamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

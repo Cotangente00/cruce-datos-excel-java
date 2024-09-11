@@ -66,6 +66,10 @@ public class buscarV_nombres {
             wb.close();
             fileInputStream.close();
 
+            System.out.println("Nombres completos agregados exitosamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
