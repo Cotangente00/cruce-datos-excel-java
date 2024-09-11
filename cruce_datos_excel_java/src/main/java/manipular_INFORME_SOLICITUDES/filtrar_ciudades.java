@@ -16,16 +16,16 @@ public class filtrar_ciudades {
 
         // Cargar archivo Excel
         FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-        Workbook workbook = new XSSFWorkbook(fileInputStream);
-        Sheet sheet = workbook.getSheetAt(0);
+        Workbook wb = new XSSFWorkbook(fileInputStream);
+        Sheet ws = wb.getSheetAt(0);
 
         // Encontrar el índice de la columna "Ciudad" (M es la columna 12, 0-indexed)
         int columnaCiudadIndex = 12;
         int columnaOIndex = 14;
 
         // Iterar sobre las filas y eliminar las que no cumplan con el criterio
-        for (int rowIndex = sheet.getLastRowNum(); rowIndex >= 1; rowIndex--) {  // Empieza desde el final para evitar problemas con el shift de filas y salteandose el encabezado
-            Row row = sheet.getRow(rowIndex);
+        for (int rowIndex = ws.getLastRowNum(); rowIndex >= 1; rowIndex--) {  // Empieza desde el final para evitar problemas con el shift de filas y salteandose el encabezado
+            Row row = ws.getRow(rowIndex);
             if (row != null) {
                 Cell cellCiudad = row.getCell(columnaCiudadIndex);
                 String valorCiudad = (cellCiudad != null) ? cellCiudad.getStringCellValue().trim() : "";
@@ -42,23 +42,30 @@ public class filtrar_ciudades {
                     }  
                     cellColumnaO.setCellValue("Ciudad vacía(Confirmar)");
                 } else if (!ciudadesValidas.contains(valorCiudad.toLowerCase())) {
-                    int lastRow = sheet.getLastRowNum();
+                    int lastRow = ws.getLastRowNum();
                     if (rowIndex < lastRow) {
-                        sheet.shiftRows(rowIndex + 1, lastRow, -1);
+                        ws.shiftRows(rowIndex + 1, lastRow, -1);
                     } else {
-                        sheet.removeRow(row);
+                        ws.removeRow(row);
                     }
                 } 
             }
         }
 
+        int EliminarColumnaN = 12; // Índice de la columna (empezando desde 0)
+        for (Row fila : ws) {
+            if (fila != null && fila.getCell(EliminarColumnaN) != null) {
+                fila.removeCell(fila.getCell(EliminarColumnaN));
+            }
+        }
+
         // Escribir los cambios en un nuevo archivo
         FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-        workbook.write(fileOutputStream);
+        wb.write(fileOutputStream);
 
         // Cerrar recursos
         fileOutputStream.close();
-        workbook.close();
+        wb.close();
         fileInputStream.close();
 
         System.out.println("Proceso completado. Filas filtradas y archivo guardado en: " + inputFilePath);

@@ -7,9 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class borrar_columnas_restantes {
-    public static void borrarColumnasRestantes(String archivoExcel) throws IOException {
+    public static void borrarColumnasRestantes(String inputFilePath) throws IOException {
         // Cargar el archivo Excel
-        FileInputStream archivo = new FileInputStream(archivoExcel);
+        FileInputStream archivo = new FileInputStream(inputFilePath);
         Workbook wb = new XSSFWorkbook(archivo);
         Sheet ws = wb.getSheetAt(0); // Obtener la primera hoja
 
@@ -30,7 +30,7 @@ public class borrar_columnas_restantes {
         }
     
         // Guardar los cambios en el archivo
-        FileOutputStream archivoSalida = new FileOutputStream(archivoExcel);
+        FileOutputStream archivoSalida = new FileOutputStream(inputFilePath);
         wb.write(archivoSalida);
 
         // Cerrar los archivos y liberar recursos
