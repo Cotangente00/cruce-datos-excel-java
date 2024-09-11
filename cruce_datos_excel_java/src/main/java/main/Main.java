@@ -21,6 +21,7 @@ public class Main {
             buscarV_nombres_cedulas.simulateBUSCARV(rutaArchivo);
             buscarV_nombres.simulateBUSCARVHoja1(rutaArchivo);
             no_service_copy_paste.copiarFilas(rutaArchivo);
+            delete_celdas_vacias_H.limpiar_caracteres_invisibles(rutaArchivo);
             System.out.println("Columnas eliminadas correctamente.");
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());
