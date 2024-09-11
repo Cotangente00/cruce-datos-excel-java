@@ -19,6 +19,7 @@ public class Main {
             find_table.encontrar_tabla(rutaArchivo);
             concatenar_nombres_apellidos.concatenacion(rutaArchivo);
             buscarV_nombres_cedulas.simulateBUSCARV(rutaArchivo);
+            buscarV_nombres.simulateBUSCARVHoja1(rutaArchivo);
             System.out.println("Columnas eliminadas correctamente.");
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());
