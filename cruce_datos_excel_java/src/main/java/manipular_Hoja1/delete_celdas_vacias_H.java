@@ -41,6 +41,9 @@ public class delete_celdas_vacias_H {
             fileOutputStream.close();
             wb.close();
             fileInputStream.close();
+
+            System.out.println("Caracteres invisibles eliminados exitosamente.");
+
         }
     }
     public static void main(String[] args) {
