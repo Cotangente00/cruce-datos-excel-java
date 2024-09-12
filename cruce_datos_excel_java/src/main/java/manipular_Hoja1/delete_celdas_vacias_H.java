@@ -15,7 +15,6 @@ public class delete_celdas_vacias_H {
             Sheet ws = wb.getSheetAt(1);
 
             int primeraFilaHoja1 = 4;
-
             // Recorrer las filas de la hoja "Hoja1" desde la fila 5 en adelante
             for (int i = primeraFilaHoja1; i <= ws.getLastRowNum(); i++) {
                 Row filaHoja1 = ws.getRow(i);
@@ -23,17 +22,12 @@ public class delete_celdas_vacias_H {
                 if (filaHoja1 != null) {
                     Cell celdaH = filaHoja1.getCell(7); 
 
-                    if (celdaH.getCellType() == CellType.STRING) {
-                        String contenido = celdaH.getStringCellValue().trim().replaceAll("\\s+", "");
-                        if (!contenido.isEmpty()) {
-                            celdaH.setCellValue(contenido);
-                        } else {
+                    if (celdaH.getStringCellValue() == null || celdaH.getStringCellValue().isEmpty()) {
                             filaHoja1.removeCell(celdaH);
-                        }
-                    } 
-
-                }
+                    }
+                } 
             }
+
             FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
             wb.write(fileOutputStream);
 
@@ -43,9 +37,9 @@ public class delete_celdas_vacias_H {
             fileInputStream.close();
 
             System.out.println("Caracteres invisibles eliminados exitosamente.");
-
+            }
         }
-    }
+    
     public static void main(String[] args) {
         String inputFilePath = "O:/programa/cruce-datos-excel-java/result.xlsx";
         try {
