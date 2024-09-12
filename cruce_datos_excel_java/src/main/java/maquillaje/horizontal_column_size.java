@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class horizontal_column_size {
-    public static void ajustarAnchoColumnas(String inputFilePath, String outputFilePath) throws IOException {
+    public static void ajustarAnchoColumnas(String inputFilePath) throws IOException {
 
         // Cargar archivo Excel
         FileInputStream fileInputStream = new FileInputStream(inputFilePath);
@@ -66,7 +66,7 @@ public class horizontal_column_size {
         ajustarColumnasManualmente(ws2, 7); // Columna G (índice 6)     
 
         // Escribir los cambios en un archivo nuevo o sobreescribir el original
-        FileOutputStream fileOutputStream = new FileOutputStream(outputFilePath);
+        FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
         wb.write(fileOutputStream);
 
         // Cerrar recursos
@@ -104,10 +104,10 @@ public class horizontal_column_size {
     }
     public static void main(String[] args) {
         String inputFilePath = "O:/programa/cruce-datos-excel-java/result.xlsx";
-        String outputFilePath = "O:/programa/cruce-datos-excel-java/result2.xlsx";
+        //String outputFilePath = "O:/programa/cruce-datos-excel-java/result2.xlsx";
 
         try {
-            ajustarAnchoColumnas(inputFilePath, outputFilePath);
+            ajustarAnchoColumnas(inputFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
