@@ -1,16 +1,16 @@
 package maquillaje;
 
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+    import org.apache.poi.ss.usermodel.*;
+    import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+    import java.io.FileInputStream;
+    import java.io.FileOutputStream;
+    import java.io.IOException;
+    import java.util.ArrayList;
+    import java.util.List;
 
-public class order_alphabetic {
-    public static void reorganizeExcel(String inputFilePath) throws IOException {
+public class order_alphabetic_INFORME_SOLICITUDES {
+    public static void reorganizeExcel_INFORME_SOLICITUDES(String inputFilePath) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(inputFilePath);
         Workbook wb = new XSSFWorkbook(fileInputStream);
         Sheet originalSheet = wb.getSheetAt(0);  // Obtener la primera hoja
@@ -94,7 +94,7 @@ public class order_alphabetic {
     }
 
     // Método para copiar el contenido de una fila a otra
-    private static void copyRow(Row sourceRow, Row targetRow, Workbook wb) {
+    public static void copyRow(Row sourceRow, Row targetRow, Workbook wb) {
         for (int i = 0; i < sourceRow.getLastCellNum(); i++) {
             Cell sourceCell = sourceRow.getCell(i);
             Cell targetCell = targetRow.createCell(i);
@@ -131,7 +131,7 @@ public class order_alphabetic {
         try {
             String inputFilePath = "O:/aa/result.xlsx";
             //String outputFilePath = "O:/aa/result2.xlsx";
-            reorganizeExcel(inputFilePath);
+            reorganizeExcel_INFORME_SOLICITUDES(inputFilePath);
             System.out.println("Archivo reorganizado exitosamente.");
         } catch (IOException e) {
             e.printStackTrace();

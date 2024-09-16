@@ -10,8 +10,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class eliminar_filas {
     public static void main(String[] args) {
-        String excelFilePath = "O:/programa/cruce-datos-excel-java/test-lunes-jueves.xlsx"; // Ruta al archivo
-        String newExcelFilePath = "O:/programa/cruce-datos-excel-java/result.xlsx"; // Ruta al nuevo archivo
+        String excelFilePath = "O:/aa/test-lunes-jueves.xlsx"; // Ruta al archivo
+        String newExcelFilePath = "O:/aa/result.xlsx"; // Ruta al nuevo archivo
 
         try (FileInputStream fis = new FileInputStream(excelFilePath);
              Workbook wb = new XSSFWorkbook(fis)) {

@@ -24,7 +24,8 @@ public class Main {
             no_service_copy_paste.copiarFilas(rutaArchivo);
             delete_celdas_vacias_H.limpiar_caracteres_invisibles(rutaArchivo);
             horizontal_column_size.ajustarAnchoColumnas(rutaArchivo);
-            order_alphabetic.reorganizeExcel(rutaArchivo);
+            order_alphabetic_INFORME_SOLICITUDES.reorganizeExcel_INFORME_SOLICITUDES(rutaArchivo);
+            order_alphabetic_Hoja1.reorganizeExcel_Hoja1(rutaArchivo);
             System.out.println("Columnas eliminadas correctamente.");
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());
