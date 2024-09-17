@@ -11,7 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class delete_image {
-    public static void copiarContenidoHoja(String inputFilePath, String outputFilePath) throws IOException {
+    public static void copiarContenidoHoja(String inputFilePath) throws IOException {
         // Cargar el archivo Excel
         FileInputStream fileInputStream = new FileInputStream(inputFilePath);
         ZipSecureFile.setMinInflateRatio(0);
@@ -80,7 +80,7 @@ public class delete_image {
 
 
         // Guardar el archivo Excel modificado
-        FileOutputStream fos = new FileOutputStream(outputFilePath);
+        FileOutputStream fos = new FileOutputStream(inputFilePath);
         wb.write(fos);
 
         // Cerrar flujos y workbook
@@ -158,8 +158,8 @@ public class delete_image {
         try {
             // Ejemplo de uso
             String inputFilePath = "O:/aa/result.xlsx";
-            String outputFilePath = "O:/aa/result2.xlsx";
-            copiarContenidoHoja(inputFilePath, outputFilePath);
+            //String outputFilePath = "O:/aa/result2.xlsx";
+            copiarContenidoHoja(inputFilePath);
             System.out.println("Imagen eliminada exitosamente.");
         } catch (IOException e) {
             e.printStackTrace();

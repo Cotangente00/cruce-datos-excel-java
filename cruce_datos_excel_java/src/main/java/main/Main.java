@@ -26,6 +26,7 @@ public class Main {
             horizontal_column_size.ajustarAnchoColumnas(rutaArchivo);
             order_alphabetic_INFORME_SOLICITUDES.reorganizeExcel_INFORME_SOLICITUDES(rutaArchivo);
             order_alphabetic_Hoja1.reorganizeExcel_Hoja1(rutaArchivo);
+            delete_image.copiarContenidoHoja(rutaArchivo);
             System.out.println("Columnas eliminadas correctamente.");
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());
