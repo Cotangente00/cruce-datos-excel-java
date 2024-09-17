@@ -78,7 +78,7 @@ public class horizontal_column_size {
     }
 
     // Método auxiliar para ajustar manualmente el ancho de columnas con celdas vacías o sin encabezado
-    private static void ajustarColumnasManualmente(Sheet sheet, int colIndex) {
+    public static void ajustarColumnasManualmente(Sheet sheet, int colIndex) {
         int maxWidth = 0;
 
         // Multiplicador para ajustar mejor el tamaño en base al contenido
