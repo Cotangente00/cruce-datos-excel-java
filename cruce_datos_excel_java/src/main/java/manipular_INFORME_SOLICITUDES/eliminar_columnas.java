@@ -1,16 +1,11 @@
 package manipular_INFORME_SOLICITUDES;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class eliminar_columnas {
-    public static void eliminarColumnas(String inputFilePath) throws IOException {
-        // Cargar el archivo Excel
-        FileInputStream archivo = new FileInputStream(inputFilePath);
-        Workbook wb = new XSSFWorkbook(archivo);
+    public static void eliminarColumnas(Workbook wb) throws IOException {
+
         Sheet ws = wb.getSheetAt(0); // Obtener la primera hoja
 
         // Índices de las columnas a eliminar (empiezan desde 0: A=0, B=1, C=2, etc.)
@@ -38,15 +33,6 @@ public class eliminar_columnas {
                 }
             }
         }
-
-        // Guardar los cambios en el archivo
-        FileOutputStream archivoSalida = new FileOutputStream(inputFilePath);
-        wb.write(archivoSalida);
-
-        // Cerrar los archivos y liberar recursos
-        archivoSalida.close();
-        wb.close();
-        archivo.close();
     }
 
     // Función para copiar el contenido de una celda a otra sin usar setCellType
@@ -79,7 +65,7 @@ public class eliminar_columnas {
         }
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String rutaArchivo = "O:/programa/cruce-datos-excel-java/test-lunes-jueves.xlsx";
 
         try {
@@ -88,5 +74,5 @@ public class eliminar_columnas {
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());
         }
-    }
+    }*/
 }

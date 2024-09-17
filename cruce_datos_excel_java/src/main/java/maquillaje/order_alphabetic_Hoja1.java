@@ -1,11 +1,7 @@
 package maquillaje;
 
-import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.*;
@@ -13,10 +9,8 @@ import java.util.*;
 
 
 public class order_alphabetic_Hoja1 {
-    public static void reorganizeExcel_Hoja1(String inputFilePath) throws IOException {
-        FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-        ZipSecureFile.setMinInflateRatio(0);
-        Workbook wb = new XSSFWorkbook(fileInputStream);
+    public static void reorganizeExcel_Hoja1(Workbook wb) throws IOException {
+        
         Sheet originalSheet = wb.getSheetAt(1);  // Obtener la primera hoja
         Sheet newSheet = wb.createSheet("ReorganizedSheet");  // Crear una nueva hoja para los datos reorganizados
 
@@ -90,16 +84,9 @@ public class order_alphabetic_Hoja1 {
         }
 
         wb.removeSheetAt(2);
-        
-
-        // Guardar el archivo de salida
-        FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-        wb.write(fileOutputStream);
-        fileOutputStream.close();
-        wb.close();
     }
     
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         try {
             String inputFilePath = "O:/aa/result.xlsx";
             //String outputFilePath = "O:/aa/result2.xlsx";
@@ -108,5 +95,5 @@ public class order_alphabetic_Hoja1 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

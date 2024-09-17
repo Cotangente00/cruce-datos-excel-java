@@ -1,16 +1,11 @@
 package manipular_INFORME_SOLICITUDES;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class borrar_columnas_restantes {
-    public static void borrarColumnasRestantes(String inputFilePath) throws IOException {
-        // Cargar el archivo Excel
-        FileInputStream archivo = new FileInputStream(inputFilePath);
-        Workbook wb = new XSSFWorkbook(archivo);
+    public static void borrarColumnasRestantes(Workbook wb) throws IOException {
+    
         Sheet ws = wb.getSheetAt(0); // Obtener la primera hoja
 
         // Índices de las columnas a eliminar (empiezan desde 0: A=0, B=1, C=2, etc.)
@@ -28,14 +23,5 @@ public class borrar_columnas_restantes {
                 }       
             }
         }
-    
-        // Guardar los cambios en el archivo
-        FileOutputStream archivoSalida = new FileOutputStream(inputFilePath);
-        wb.write(archivoSalida);
-
-        // Cerrar los archivos y liberar recursos
-        archivoSalida.close();
-        wb.close();
-        archivo.close();
     }
 }

@@ -2,20 +2,13 @@ package maquillaje;
 
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream; 
-
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class delete_image {
-    public static void copiarContenidoHoja(String inputFilePath) throws IOException {
+    public static void copiarContenidoHoja(Workbook wb) throws IOException {
         // Cargar el archivo Excel
-        FileInputStream fileInputStream = new FileInputStream(inputFilePath);
         ZipSecureFile.setMinInflateRatio(0);
-        Workbook wb = new XSSFWorkbook(fileInputStream);
 
         // Obtener la hoja de origen y la hoja de destino
         Sheet ws = wb.getSheetAt(0);
@@ -69,24 +62,13 @@ public class delete_image {
 
 
         // Reordenar las hojas del archivo
-        XSSFSheet ws1 = (XSSFSheet) wb.getSheetAt(0);
+        Sheet ws1 = (Sheet) wb.getSheetAt(0);
         int indiceHoja1 = wb.getSheetIndex(ws1);
         // Mover la hoja "INFORME SOLICITUDES" al índice 1 (después de "Hoja1")
         wb.setSheetOrder(ws1.getSheetName(), indiceHoja1 + 1);
         // Renombrar la hoja
         wb.setSheetName(0, "INFORME SOLICITUDES");
 
-
-
-
-        // Guardar el archivo Excel modificado
-        FileOutputStream fos = new FileOutputStream(inputFilePath);
-        wb.write(fos);
-
-        // Cerrar flujos y workbook
-        fos.close();
-        wb.close();
-        fileInputStream.close();
     }
 
     // Función para copiar el contenido de una celda
@@ -154,15 +136,15 @@ public class delete_image {
         }
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         try {
             // Ejemplo de uso
-            String inputFilePath = "O:/aa/result.xlsx";
-            //String outputFilePath = "O:/aa/result2.xlsx";
-            copiarContenidoHoja(inputFilePath);
+            String inputFilePath = "O:/aa/result.xls";
+            String outputFilePath = "O:/aa/result2.xls";
+            copiarContenidoHoja(inputFilePath, outputFilePath);
             System.out.println("Imagen eliminada exitosamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
