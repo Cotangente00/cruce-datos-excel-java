@@ -23,6 +23,15 @@ public class filtrar_ciudades {
         int columnaCiudadIndex = 12;
         int columnaOIndex = 14;
 
+        //Crear un estilo de celda para las expertas cuyas ciudades son "Soacha" y NULL
+        CellStyle style = wb.createCellStyle();
+        Font font = wb.createFont();
+        font.setBold(true);
+        font.setUnderline(Font.U_SINGLE);
+        style.setFont(font);
+
+
+
         // Iterar sobre las filas y eliminar las que no cumplan con el criterio
         for (int rowIndex = ws.getLastRowNum(); rowIndex >= 1; rowIndex--) {  // Empieza desde el final para evitar problemas con el shift de filas y salteandose el encabezado
             Row row = ws.getRow(rowIndex);
@@ -35,12 +44,14 @@ public class filtrar_ciudades {
                         cellColumnaO = row.createCell(columnaOIndex);
                     }  
                     cellColumnaO.setCellValue("Soacha(Validar Servicio)");
+                    cellColumnaO.setCellStyle(style);
                 } else if (valorCiudad.isEmpty()){
                     Cell cellColumnaO = row.getCell(columnaOIndex);
                     if (cellColumnaO == null) {
                         cellColumnaO = row.createCell(columnaOIndex);
                     }  
                     cellColumnaO.setCellValue("Ciudad vacía(Confirmar)");
+                    cellColumnaO.setCellStyle(style);
                 } else if (!ciudadesValidas.contains(valorCiudad.toLowerCase())) {
                     int lastRow = ws.getLastRowNum();
                     if (rowIndex < lastRow) {
