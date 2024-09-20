@@ -39,7 +39,7 @@ public class filtrar_ciudades {
                     }  
                     cellColumnaO.setCellValue("Soacha(Validar Servicio)");
                     cellColumnaO.setCellStyle(style);
-                } else if (valorCiudad.isEmpty()){
+                } else if (valorCiudad.isEmpty() || valorCiudad.equalsIgnoreCase("") || valorCiudad == null){
                     Cell cellColumnaO = row.getCell(columnaOIndex);
                     if (cellColumnaO == null) {
                         cellColumnaO = row.createCell(columnaOIndex);
@@ -63,7 +63,16 @@ public class filtrar_ciudades {
                 fila.removeCell(fila.getCell(EliminarColumnaN));
             }
         }
+        
 
         System.out.println("Proceso completado. Filas filtradas.");
+        
+        //Eliminar todas las filas cuyo valor en la columna A esté vacío
+        for (int rowIndex2 = ws.getLastRowNum(); rowIndex2 >= 1; rowIndex2--) {
+            Row row = ws.getRow(rowIndex2);
+            if (row == null || row.getCell(0) == null || row.getCell(0).getCellType() == CellType.BLANK) {
+                ws.removeRow(row);
+            }
+        }
     }
 }
