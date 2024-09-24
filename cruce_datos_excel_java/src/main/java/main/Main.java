@@ -70,6 +70,10 @@ public class Main {
                 order_INFORME_SOLICITUDES.reorganizeExcel_INFORME_SOLICITUDES(wb2);
                 order_alphabetic_Hoja1.reorganizeExcel_Hoja1(wb2);
                 delete_image.copiarContenidoHoja(wb2);
+                //Ajustar la altura de la primera fila
+                Sheet ws = wb2.getSheetAt(0); // Obteniendo la primera hoja
+                Row fila = ws.getRow(0); //Obteniendo la primera fila de la hoja
+                fila.setHeightInPoints(20); //Altura de la fila
                 System.out.println("Archivo procesado exitosamente.");
                 //Guardar el archivo de manera convencional
                 wb2.write(new FileOutputStream(outputFilePath));
@@ -131,6 +135,7 @@ public class Main {
                 }
             }
         }
+
     }
 
     private static void copiarColorFondo(Workbook wbDestino, CellStyle estiloOrigen, CellStyle estiloDestino) {
