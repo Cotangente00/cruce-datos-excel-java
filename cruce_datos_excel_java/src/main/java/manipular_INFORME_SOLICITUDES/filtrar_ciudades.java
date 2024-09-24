@@ -1,22 +1,16 @@
 package manipular_INFORME_SOLICITUDES;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class filtrar_ciudades {
-    public static void filtrarCiudades(String inputFilePath) throws IOException {
+    public static void filtrarCiudades(Workbook wb) throws IOException {
         // Lista de ciudades válidas
         List<String> ciudadesValidas = Arrays.asList("bogotá", "chía", "cota", "cajicá", "soacha", "", "bogota", "chia", "cajica");
 
-        // Cargar archivo Excel
-        FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-        Workbook wb = new XSSFWorkbook(fileInputStream);
         Sheet ws = wb.getSheetAt(0);
 
         // Encontrar el índice de la columna "Ciudad" (M es la columna 12, 0-indexed)
@@ -45,7 +39,7 @@ public class filtrar_ciudades {
                     }  
                     cellColumnaO.setCellValue("Soacha(Validar Servicio)");
                     cellColumnaO.setCellStyle(style);
-                } else if (valorCiudad.isEmpty()){
+                } else if (valorCiudad.isEmpty() || valorCiudad.equalsIgnoreCase("") || valorCiudad == null){
                     Cell cellColumnaO = row.getCell(columnaOIndex);
                     if (cellColumnaO == null) {
                         cellColumnaO = row.createCell(columnaOIndex);
@@ -69,16 +63,16 @@ public class filtrar_ciudades {
                 fila.removeCell(fila.getCell(EliminarColumnaN));
             }
         }
+        
 
-        // Escribir los cambios en un nuevo archivo
-        FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-        wb.write(fileOutputStream);
-
-        // Cerrar recursos
-        fileOutputStream.close();
-        wb.close();
-        fileInputStream.close();
-
-        System.out.println("Proceso completado. Filas filtradas y archivo guardado en: " + inputFilePath);
+        System.out.println("Proceso completado. Filas filtradas.");
+        
+        //Eliminar todas las filas cuyo valor en la columna A esté vacío
+        for (int rowIndex2 = ws.getLastRowNum(); rowIndex2 >= 1; rowIndex2--) {
+            Row row = ws.getRow(rowIndex2);
+            if (row == null || row.getCell(0) == null || row.getCell(0).getCellType() == CellType.BLANK) {
+                ws.removeRow(row);
+            }
+        }
     }
 }

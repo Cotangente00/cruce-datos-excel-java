@@ -1,17 +1,12 @@
 package manipular_INFORME_SOLICITUDES;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class int_format {
-        public static void convertirTextoANumero(String inputFilePath) throws IOException {
-            // Cargar el archivo Excel
-            FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-            Workbook wb = new XSSFWorkbook(fileInputStream);
+        public static void convertirTextoANumero(Workbook wb) throws IOException {
+
             Sheet ws = wb.getSheetAt(0);
 
             // Convertir columnas A (índice 0), B (índice 1) y J (índice 9)
@@ -35,16 +30,6 @@ public class int_format {
                     }
                 }
             }
-
-            // Guardar los cambios en un nuevo archivo
-            FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-            wb.write(fileOutputStream);
-
-            // Cerrar recursos
-            fileOutputStream.close();
-            wb.close();
-            fileInputStream.close();
-
-            System.out.println("Proceso completado. Datos convertidos a formato numérico y archivo guardado en: " + inputFilePath);
+            System.out.println("Proceso completado. Datos convertidos a formato numérico.");
         }
 }

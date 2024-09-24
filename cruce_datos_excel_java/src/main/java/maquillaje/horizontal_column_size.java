@@ -1,18 +1,12 @@
 package maquillaje;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class horizontal_column_size {
-    public static void ajustarAnchoColumnas(String inputFilePath) throws IOException {
+    public static void ajustarAnchoColumnas(Workbook wb) throws IOException {
 
-        // Cargar archivo Excel
-        FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-        Workbook wb = new XSSFWorkbook(fileInputStream);
         Sheet ws = wb.getSheetAt(0); // Obteniendo la primera hoja
         Sheet ws2 = wb.getSheetAt(1); // Obteniendo la segunda hoja
 
@@ -65,16 +59,7 @@ public class horizontal_column_size {
         ajustarColumnasManualmente(ws2, 5); // Columna F (índice 5)
         ajustarColumnasManualmente(ws2, 7); // Columna G (índice 6)     
 
-        // Escribir los cambios en un archivo nuevo o sobreescribir el original
-        FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-        wb.write(fileOutputStream);
-
-        // Cerrar recursos
-        fileOutputStream.close();
-        wb.close();
-        fileInputStream.close();
-
-        System.out.println("Proceso completado. Se ajustó el ancho de las columnas en: " + inputFilePath);
+        System.out.println("Proceso completado. Se ajustó el ancho de las columnas.");
     }
 
     // Método auxiliar para ajustar manualmente el ancho de columnas con celdas vacías o sin encabezado
@@ -102,7 +87,7 @@ public class horizontal_column_size {
         // Ajustar el ancho de la columna al valor máximo encontrado
         sheet.setColumnWidth(colIndex, Math.min(maxWidth, 255 * 256)); // Limitar el ancho máximo permitido por Excel
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String inputFilePath = "O:/programa/cruce-datos-excel-java/result.xlsx";
         //String outputFilePath = "O:/programa/cruce-datos-excel-java/result2.xlsx";
 
@@ -111,5 +96,5 @@ public class horizontal_column_size {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

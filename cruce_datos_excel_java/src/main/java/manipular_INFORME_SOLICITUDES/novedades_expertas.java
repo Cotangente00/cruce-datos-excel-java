@@ -1,18 +1,13 @@
 package manipular_INFORME_SOLICITUDES;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 
 public class novedades_expertas {
-    public static void resaltarNovedad(String inputFilePath) throws IOException {
-        // Cargar el archivo Excel
-        FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-        Workbook wb = new XSSFWorkbook(fileInputStream);
+    public static void resaltarNovedad(Workbook wb) throws IOException {
+        
         Sheet ws = wb.getSheetAt(0);
 
         // Crear un estilo de celda con relleno amarillo
@@ -52,20 +47,9 @@ public class novedades_expertas {
                 fila.removeCell(fila.getCell(EliminarColumnaN));
             }
         }
-        
-
-        // Guardar los cambios en un nuevo archivo
-        FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-        wb.write(fileOutputStream);
-
-        // Cerrar recursos
-        fileOutputStream.close();
-        wb.close();
-        fileInputStream.close();
-
         System.out.println("Proceso completado. Las celdas de las columnas J y K han sido resaltadas donde corresponda.");
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         try {
             // Ruta del archivo de entrada y salida
             String inputFilePath = "O:/programa/cruce-datos-excel-java/result.xlsx";
@@ -75,5 +59,5 @@ public class novedades_expertas {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

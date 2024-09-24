@@ -1,17 +1,12 @@
 package manipular_Hoja1;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class concatenar_nombres_apellidos {
-    public static void concatenacion(String inputFilePath) throws IOException {
-        // Cargar el archivo Excel
-        FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-        Workbook wb = new XSSFWorkbook(fileInputStream);
+    public static void concatenacion(Workbook wb) throws IOException {
+
         Sheet ws = wb.getSheetAt(1); // Obtener la hoja
 
         int columnaE = 4, columnaF = 5;
@@ -58,14 +53,6 @@ public class concatenar_nombres_apellidos {
                 }
             }
         }
-        FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-        wb.write(fileOutputStream);
-
-        // Cerrar recursos
-        fileOutputStream.close();
-        wb.close();
-        fileInputStream.close();
-
         System.out.println("Nombres y apellidos concatenados exitosamente.");
     }
 
@@ -99,12 +86,12 @@ public class concatenar_nombres_apellidos {
         }
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String rutaArchivo = "O:/programa/cruce-datos-excel-java/result.xlsx";
         try {
             concatenacion(rutaArchivo);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }   
+    }*/  
 }

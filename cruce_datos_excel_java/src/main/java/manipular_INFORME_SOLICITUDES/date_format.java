@@ -1,19 +1,14 @@
 package manipular_INFORME_SOLICITUDES;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.DateUtil;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
 public class date_format {
-    public static void formatearFechas(String inputFilePath) throws IOException {
-        // Cargar el archivo Excel
-        FileInputStream fileInputStream = new FileInputStream(inputFilePath);
-        Workbook wb = new XSSFWorkbook(fileInputStream);
+    public static void formatearFechas(Workbook wb) throws IOException {
+
         Sheet ws = wb.getSheetAt(0);
 
         // Crear un estilo de celda para formato de fecha DD/MM/YYYY
@@ -42,17 +37,6 @@ public class date_format {
                 }
             }
         }
-
-
-        // Guardar los cambios en un nuevo archivo
-        FileOutputStream fileOutputStream = new FileOutputStream(inputFilePath);
-        wb.write(fileOutputStream);
-
-        // Cerrar recursos
-        fileOutputStream.close();
-        wb.close();
-        fileInputStream.close();
-
-        System.out.println("Proceso completado. Fechas formateadas y archivo guardado en: " + inputFilePath);    
+        System.out.println("Proceso completado. Fechas formateadas.");    
     }
 }
