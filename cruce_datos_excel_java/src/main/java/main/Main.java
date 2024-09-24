@@ -99,6 +99,8 @@ public class Main {
     // Función para copiar una hoja de un workbook a otro
     private static void copiarHoja(Sheet hojaOrigen, Sheet hojaDestino) {
         Workbook wbDestino = hojaDestino.getWorkbook();
+        Workbook wbOrigen = hojaOrigen.getWorkbook();
+
         for (int i = 0; i <= hojaOrigen.getLastRowNum(); i++) {
             Row filaOrigen = hojaOrigen.getRow(i);
             Row filaDestino = hojaDestino.createRow(i);
@@ -129,7 +131,7 @@ public class Main {
                         CellStyle estiloDestino = wbDestino.createCellStyle();
                    
                         // Copiar propiedades de estilo de la celda manualmente
-                        copiarColorFondo(wbDestino, estiloOrigen, estiloDestino);
+                        copiarColorFondo(wbOrigen,wbDestino, estiloOrigen, estiloDestino);
                         celdaDestino.setCellStyle(estiloDestino);
                     }
                 }
@@ -138,9 +140,21 @@ public class Main {
 
     }
 
-    private static void copiarColorFondo(Workbook wbDestino, CellStyle estiloOrigen, CellStyle estiloDestino) {
+    private static void copiarColorFondo(Workbook wbOrigen, Workbook wbDestino, CellStyle estiloOrigen, CellStyle estiloDestino) {
         // Copiar color de fondo y primer plano
         estiloDestino.setFillForegroundColor(estiloOrigen.getFillForegroundColor());
         estiloDestino.setFillPattern(estiloOrigen.getFillPattern());
+
+        // Copiar fuentes
+        Font fuenteOrigen = wbOrigen.getFontAt(estiloOrigen.getFontIndex());  
+        Font fuenteDestino = wbDestino.createFont();
+        copiarBold(fuenteOrigen, fuenteDestino);
+        estiloDestino.setFont(fuenteDestino);
+    }
+
+    // Función para copiar las propiedades de la fuente
+    private static void copiarBold(Font fuenteOrigen, Font fuenteDestino) {
+    fuenteDestino.setBold(fuenteOrigen.getBold());
+    fuenteDestino.setUnderline(fuenteOrigen.getUnderline());
     }
 }
