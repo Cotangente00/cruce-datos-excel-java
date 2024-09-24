@@ -86,6 +86,8 @@ public class horizontal_column_size {
         }
         // Ajustar el ancho de la columna al valor máximo encontrado
         sheet.setColumnWidth(colIndex, Math.min(maxWidth, 255 * 256)); // Limitar el ancho máximo permitido por Excel
+        Row fila = sheet.getRow(0);
+        fila.setHeightInPoints(20); //Altura de la fila
     }
     /*public static void main(String[] args) {
         String inputFilePath = "O:/programa/cruce-datos-excel-java/result.xlsx";

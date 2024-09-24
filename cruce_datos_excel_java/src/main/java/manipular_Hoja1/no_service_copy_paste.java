@@ -1,7 +1,12 @@
 package manipular_Hoja1;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 public class no_service_copy_paste {
@@ -33,7 +38,7 @@ public class no_service_copy_paste {
                 Cell celdaH = filaHoja1.getCell(7);  // Columna H es el índice 7
 
                 // Si la celda H está vacía, copiar los datos de D, E y F a P, Q y R en Hoja1
-                if (celdaH == null || esCeldaVaciaOInvisble(celdaH)) {
+                if (celdaH == null || celdaH.getCellType() == CellType.BLANK) {
                     Row filaINFORME_SOLICITUDES = wsINFORME_SOLICITUDES.getRow(filaDestino);
                     if (filaINFORME_SOLICITUDES == null) {
                         filaINFORME_SOLICITUDES = wsINFORME_SOLICITUDES.createRow(filaDestino);
@@ -46,6 +51,7 @@ public class no_service_copy_paste {
 
                     // Crear y asignar valores a las celdas P, Q y R en "INFORME SOLICITUDES"
                     Cell celdaP = filaINFORME_SOLICITUDES.createCell(12);  // Columna M es el índice 12
+                    System.out.println("valor de celda P después de copiar " + celdaP.toString());
                     Cell celdaQ = filaINFORME_SOLICITUDES.createCell(13);  // Columna N es el índice 13
                     Cell celdaR = filaINFORME_SOLICITUDES.createCell(14);  // Columna O es el índice 14
 
@@ -122,13 +128,20 @@ public class no_service_copy_paste {
         return ultimaFila;
     }
 
-    /*public static void main(String[] args) {
-        String rutaArchivo = "O:/programa/cruce-datos-excel-java/result.xlsx";
-        //String rutaArchivoSalida = "O:/programa/cruce-datos-excel-java/result2.xlsx";
+    public static void main(String[] args) throws EncryptedDocumentException, IOException {
+        String inputFilePath = "O:/aa/result.xlsx"; // Ruta del archivo .xls original
+        String outputFilePath = "O:/aa/result2.xlsx";
+        FileInputStream fileInputStream = new FileInputStream(new File(inputFilePath));
+        Workbook wb = WorkbookFactory.create(fileInputStream);
         try {
-            copiarFilas(rutaArchivo);
+            copiarFilas(wb);
+            //Guardar archivo 
+            FileOutputStream fileOutputStream = new FileOutputStream(new File(outputFilePath));
+            wb.write(fileOutputStream);
+            fileOutputStream.close();
+            wb.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

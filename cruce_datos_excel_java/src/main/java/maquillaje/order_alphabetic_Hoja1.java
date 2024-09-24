@@ -46,12 +46,12 @@ public class order_alphabetic_Hoja1 {
         int newRowIndex = 4; 
         // Copiar filas con celdas vacías en H al principio
         for (Row row : rowsWithEmptyH) {
-            order_alphabetic_INFORME_SOLICITUDES.copyRow(row, newSheet.createRow(newRowIndex++), wb);
+            order_INFORME_SOLICITUDES.copyRow(row, newSheet.createRow(newRowIndex++), wb);
         }
 
         // Copiar filas con datos después
         for (Row row : rowsWithData) {
-            order_alphabetic_INFORME_SOLICITUDES.copyRow(row, newSheet.createRow(newRowIndex++), wb);
+            order_INFORME_SOLICITUDES.copyRow(row, newSheet.createRow(newRowIndex++), wb);
         }
 
 
@@ -80,7 +80,7 @@ public class order_alphabetic_Hoja1 {
         
         int newRowIndex2 = 4;  // Comenzar desde la fila 5 en la nueva hoja
         for (Row row : data) {
-            order_alphabetic_INFORME_SOLICITUDES.copyRow(row, originalSheet.createRow(newRowIndex2++), wb);
+            order_INFORME_SOLICITUDES.copyRow(row, originalSheet.createRow(newRowIndex2++), wb);
         }
 
         wb.removeSheetAt(2);

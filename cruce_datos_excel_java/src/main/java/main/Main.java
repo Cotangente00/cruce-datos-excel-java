@@ -3,9 +3,8 @@ import manipular_INFORME_SOLICITUDES.*;
 import manipular_Hoja1.*;
 import maquillaje.*;
 
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.*;
 
@@ -42,31 +41,52 @@ public class Main {
             concatenar_nombres_apellidos.concatenacion(wb);
             buscarV_nombres_cedulas.simulateBUSCARV(wb);
             buscarV_nombres.simulateBUSCARVHoja1(wb);
-            no_service_copy_paste.copiarFilas(wb);
             delete_celdas_vacias_H.limpiar_caracteres_invisibles(wb);
-            horizontal_column_size.ajustarAnchoColumnas(wb);
-            order_alphabetic_INFORME_SOLICITUDES.reorganizeExcel_INFORME_SOLICITUDES(wb);
-            order_alphabetic_Hoja1.reorganizeExcel_Hoja1(wb);
-            delete_image.copiarContenidoHoja(wb);
-            
-            System.out.println("Archivo procesado exitosamente.");
-
             // Guardar el archivo en formato XLSX
-            try (FileOutputStream outputStream = new FileOutputStream(outputFilePath)) {
-                Workbook outputWorkbook = new XSSFWorkbook();  // Crear un nuevo libro de trabajo para XLSX
+            if (inputFilePath.endsWith(".xls")) {
+                try (FileOutputStream outputStream = new FileOutputStream(outputFilePath)) {
+                    Workbook outputWorkbook = new XSSFWorkbook();  // Crear un nuevo libro de trabajo para XLSX
 
-                // Copiar las hojas del workbook original al nuevo workbook de formato XLSX
-                for (int i = 0; i < wb.getNumberOfSheets(); i++) {
-                    outputWorkbook.createSheet(wb.getSheetName(i));
-                    copiarHoja(wb.getSheetAt(i), outputWorkbook.getSheetAt(i));
+                    // Copiar las hojas del workbook original al nuevo workbook de formato XLSX
+                    for (int i = 0; i < wb.getNumberOfSheets(); i++) {
+                        outputWorkbook.createSheet(wb.getSheetName(i));
+                        copiarHoja(wb.getSheetAt(i), outputWorkbook.getSheetAt(i));
+                    }
+
+                    outputWorkbook.write(outputStream);  // Guardar el nuevo archivo en formato XLSX
+                    outputWorkbook.close();  // Cerrar el workbook de salida
                 }
 
-                outputWorkbook.write(outputStream);  // Guardar el nuevo archivo en formato XLSX
-                outputWorkbook.close();  // Cerrar el workbook de salida
+                wb.close();  // Cerrar el workbook original
+                String inputFilePath2 = outputFilePath; // Abrir el archivo .xlsx nuevo
+                Workbook wb2;
+                try (FileInputStream fis = new FileInputStream(new File(inputFilePath2))) {
+                    wb2 = WorkbookFactory.create(fis);  // Apache POI detecta automáticamente si es .xls o .xlsx
+                }
+                estilos_encabezados_xls.estilos_encabezados(wb2);
+                date_format.formatearFechas(wb2);
+                no_service_copy_paste.copiarFilas(wb2);
+                horizontal_column_size.ajustarAnchoColumnas(wb2);
+                order_INFORME_SOLICITUDES.reorganizeExcel_INFORME_SOLICITUDES(wb2);
+                order_alphabetic_Hoja1.reorganizeExcel_Hoja1(wb2);
+                delete_image.copiarContenidoHoja(wb2);
+                System.out.println("Archivo procesado exitosamente.");
+                //Guardar el archivo de manera convencional
+                wb2.write(new FileOutputStream(outputFilePath));
+                wb2.close();
+                //SIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIUUUUUUUUUUUUUUUUUUUUUU working
+            } else {
+                no_service_copy_paste.copiarFilas(wb);
+                horizontal_column_size.ajustarAnchoColumnas(wb);
+                order_INFORME_SOLICITUDES.reorganizeExcel_INFORME_SOLICITUDES(wb);
+                order_alphabetic_Hoja1.reorganizeExcel_Hoja1(wb);
+                delete_image.copiarContenidoHoja(wb);
+                System.out.println("Archivo procesado exitosamente.");
+
+                //Guardar el archivo de manera convencional
+                wb.write(new FileOutputStream(outputFilePath));
+                wb.close();
             }
-
-            wb.close();  // Cerrar el workbook original
-
         } catch (IOException e) {
             System.out.println("Ocurrió un error al procesar el archivo: " + e.getMessage());
         }
@@ -74,6 +94,7 @@ public class Main {
 
     // Función para copiar una hoja de un workbook a otro
     private static void copiarHoja(Sheet hojaOrigen, Sheet hojaDestino) {
+        Workbook wbDestino = hojaDestino.getWorkbook();
         for (int i = 0; i <= hojaOrigen.getLastRowNum(); i++) {
             Row filaOrigen = hojaOrigen.getRow(i);
             Row filaDestino = hojaDestino.createRow(i);
@@ -99,10 +120,22 @@ public class Main {
                                 break;
                             default:
                                 break;
-                        }
+                        } 
+                        CellStyle estiloOrigen = celdaOrigen.getCellStyle();
+                        CellStyle estiloDestino = wbDestino.createCellStyle();
+                   
+                        // Copiar propiedades de estilo de la celda manualmente
+                        copiarColorFondo(wbDestino, estiloOrigen, estiloDestino);
+                        celdaDestino.setCellStyle(estiloDestino);
                     }
                 }
             }
         }
+    }
+
+    private static void copiarColorFondo(Workbook wbDestino, CellStyle estiloOrigen, CellStyle estiloDestino) {
+        // Copiar color de fondo y primer plano
+        estiloDestino.setFillForegroundColor(estiloOrigen.getFillForegroundColor());
+        estiloDestino.setFillPattern(estiloOrigen.getFillPattern());
     }
 }
