@@ -3,6 +3,9 @@ package maquillaje;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class delete_image {
@@ -136,15 +139,22 @@ public class delete_image {
         }
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        String inputFilePath = "O:/aa/result2.xlsx";
+        String outputFilePath = "O:/aa/result3.xlsx";
+        ZipSecureFile.setMinInflateRatio(0);
+        Workbook wb;
+        try (FileInputStream fis = new FileInputStream(new File(inputFilePath))) {
+            wb = WorkbookFactory.create(fis);  // Apache POI detecta automáticamente si es .xls o .xlsx
+        }
+
         try {
-            // Ejemplo de uso
-            String inputFilePath = "O:/aa/result.xls";
-            String outputFilePath = "O:/aa/result2.xls";
-            copiarContenidoHoja(inputFilePath, outputFilePath);
-            System.out.println("Imagen eliminada exitosamente.");
+            copiarContenidoHoja(wb);
+            wb.write(new FileOutputStream(outputFilePath));
+            wb.close();
+            System.out.println("Archivo procesado exitosamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

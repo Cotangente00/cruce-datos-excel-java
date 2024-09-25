@@ -78,7 +78,7 @@ public class buscarV_nombres {
     }
 
     public static void main(String[] args) throws EncryptedDocumentException, IOException {
-        String inputFilePath = "O:/aa/result.xlsx"; // Ruta del archivo .xls original
+        String inputFilePath = "O:/aa/result2.xlsx"; // Ruta del archivo .xls original
         String outputFilePath = "O:/aa/result2.xlsx";
         FileInputStream fileInputStream = new FileInputStream(new File(inputFilePath));
         Workbook wb = WorkbookFactory.create(fileInputStream);

@@ -2,6 +2,9 @@ package manipular_Hoja1;
 
 import org.apache.poi.ss.usermodel.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class delete_celdas_vacias_H {
@@ -26,12 +29,21 @@ public class delete_celdas_vacias_H {
             
         }
     
-    /*public static void main(String[] args) {
-        String inputFilePath = "O:/programa/cruce-datos-excel-java/result.xlsx";
+    public static void main(String[] args) throws Exception {
+        String inputFilePath = "O:/aa/result2.xlsx";
+        String outputFilePath = "O:/aa/result2.xlsx";
+        Workbook wb;
+        try (FileInputStream fis = new FileInputStream(new File(inputFilePath))) {
+            wb = WorkbookFactory.create(fis);  // Apache POI detecta automáticamente si es .xls o .xlsx
+        }
+
         try {
-            limpiar_caracteres_invisibles(inputFilePath);
+            limpiar_caracteres_invisibles(wb);
+            wb.write(new FileOutputStream(outputFilePath));
+            wb.close();
+            System.out.println("Archivo procesado exitosamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

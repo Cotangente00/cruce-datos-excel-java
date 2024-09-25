@@ -1,6 +1,11 @@
 package manipular_Hoja1;
 
 import org.apache.poi.ss.usermodel.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -75,12 +80,21 @@ public class buscarV_nombres_cedulas {
         System.out.println("Números de documento y nombres completos agregados exitosamente.");
     }
 
-    /*public static void main(String[] args) {
-        String rutaArchivo = "O:/programa/cruce-datos-excel-java/result.xlsx";
+    public static void main(String[] args) throws Exception {
+        String inputFilePath = "O:/aa/result2.xlsx";
+        String outputFilePath = "O:/aa/result2.xlsx";
+        Workbook wb;
+        try (FileInputStream fis = new FileInputStream(new File(inputFilePath))) {
+            wb = WorkbookFactory.create(fis);  // Apache POI detecta automáticamente si es .xls o .xlsx
+        }
+
         try {
-            simulateBUSCARV(rutaArchivo);
-        } catch (Exception e) {
+            simulateBUSCARV(wb);
+            wb.write(new FileOutputStream(outputFilePath));
+            wb.close();
+            System.out.println("Archivo procesado exitosamente.");
+        } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

@@ -2,8 +2,10 @@ package maquillaje;
 
 import org.apache.poi.ss.usermodel.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.*;
 
 
@@ -86,14 +88,21 @@ public class order_alphabetic_Hoja1 {
         wb.removeSheetAt(2);
     }
     
-    /*public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        String inputFilePath = "O:/aa/result2.xlsx";
+        String outputFilePath = "O:/aa/result3.xlsx";
+        Workbook wb;
+        try (FileInputStream fis = new FileInputStream(new File(inputFilePath))) {
+            wb = WorkbookFactory.create(fis);  // Apache POI detecta automáticamente si es .xls o .xlsx
+        }
+
         try {
-            String inputFilePath = "O:/aa/result.xlsx";
-            //String outputFilePath = "O:/aa/result2.xlsx";
-            reorganizeExcel_Hoja1(inputFilePath);
-            System.out.println("Archivo reorganizado exitosamente.");
+            reorganizeExcel_Hoja1(wb);
+            wb.write(new FileOutputStream(outputFilePath));
+            wb.close();
+            System.out.println("Archivo procesado exitosamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

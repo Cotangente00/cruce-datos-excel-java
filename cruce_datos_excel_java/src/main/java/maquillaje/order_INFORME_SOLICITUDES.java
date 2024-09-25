@@ -1,6 +1,7 @@
 package maquillaje;
 
 import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
@@ -120,8 +121,9 @@ public class order_INFORME_SOLICITUDES {
 
 
     public static void main(String[] args) throws EncryptedDocumentException, IOException {
-        String inputFilePath = "O:/aa/result.xlsx"; // Ruta del archivo .xls original
-        String outputFilePath = "O:/aa/result2.xlsx";
+        String inputFilePath = "O:/aa/result3.xlsx"; // Ruta del archivo .xls original
+        String outputFilePath = "O:/aa/result3.xlsx";
+        ZipSecureFile.setMinInflateRatio(0);
         FileInputStream fileInputStream = new FileInputStream(new File(inputFilePath));
         Workbook wb = WorkbookFactory.create(fileInputStream);
         try {
