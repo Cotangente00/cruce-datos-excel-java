@@ -1,6 +1,6 @@
 package main;
 
-import funciones_boton.*;
+import model.*;
 
 //import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
@@ -10,8 +10,8 @@ import funciones_boton.*;
 public class Main {
     
     public static void main(String[] args) {
-        String inputFilePath = "O:/aa/test-lunes-jueves.xlsx";
-        String outputFilePath = "O:/aa/result.xlsx";
+        String inputFilePath = "O:/aa/test-lunes-jueves.xls";
+        String outputFilePath = "O:/aa/result(xls).xlsx";
         try {
             boton.boton_excel(inputFilePath, outputFilePath);
         } catch (Exception e) {
