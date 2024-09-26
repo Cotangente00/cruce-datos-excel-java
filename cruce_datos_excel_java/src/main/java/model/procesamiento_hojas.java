@@ -5,7 +5,7 @@ package model;
 import java.time.*;
 import java.nio.file.*;
 
-public class boton {
+public class procesamiento_hojas {
     public static void boton_excel(String inputFilePath, String outputFilePath) throws Exception {
         Path filePath = Paths.get(inputFilePath);
         Instant instant = Files.getLastModifiedTime(filePath).toInstant();
