@@ -61,7 +61,7 @@ public class funciones_lunes_jueves {
                 no_service_copy_paste.copiarFilas(wb2);
                 horizontal_column_size.ajustarAnchoColumnas(wb2);
                 order_INFORME_SOLICITUDES.reorganizeExcel_INFORME_SOLICITUDES(wb2);
-                order_alphabetic_Hoja1.reorganizeExcel_Hoja1(wb2);
+                order_Hoja1.reorganizeExcel_Hoja1(wb2);
                 delete_image.copiarContenidoHoja(wb2);
                 //Ajustar la altura de la primera fila
                 Sheet ws = wb2.getSheetAt(0); // Obteniendo la primera hoja
@@ -76,7 +76,7 @@ public class funciones_lunes_jueves {
                 no_service_copy_paste.copiarFilas(wb);
                 horizontal_column_size.ajustarAnchoColumnas(wb);
                 order_INFORME_SOLICITUDES.reorganizeExcel_INFORME_SOLICITUDES(wb);
-                order_alphabetic_Hoja1.reorganizeExcel_Hoja1(wb);
+                order_Hoja1.reorganizeExcel_Hoja1(wb);
                 delete_image.copiarContenidoHoja(wb);
                 System.out.println("Archivo procesado exitosamente.");
 
