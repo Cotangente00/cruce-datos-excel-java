@@ -86,7 +86,7 @@ public class find_table_wknd {
                 newCell.setCellFormula(originalCell.getCellFormula());
                 break;
             case Cell.CELL_TYPE_BLANK:
-                newCell.setCellType(null);
+                newCell.setCellValue("");
                 break;
             case Cell.CELL_TYPE_ERROR:
                 newCell.setCellErrorValue(originalCell.getErrorCellValue());

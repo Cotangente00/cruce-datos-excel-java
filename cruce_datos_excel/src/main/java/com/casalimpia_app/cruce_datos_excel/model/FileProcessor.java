@@ -50,7 +50,7 @@ public class FileProcessor {
 
         // Abrir ventana para seleccionar ubicación de guardado del archivo de salida
         fileChooser.setTitle("Guardar archivo Excel modificado");
-        fileChooser.setInitialFileName("result.xlsx");  // Nombre por defecto para el archivo de salida
+        fileChooser.setInitialFileName("INFORME SOLICITUDES (MODIFIED).xlsx");  // Nombre por defecto para el archivo de salida
         File outputFile = fileChooser.showSaveDialog(stage);
         if (outputFile == null) {
             System.out.println("No se seleccionó una ubicación para guardar el archivo.");
